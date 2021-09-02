@@ -20,8 +20,6 @@ import {BrowserRouter, Route} from 'react-router-dom'
       <Route path='/RecordBook' component={RecordBook}/>
       
       
-      
-
 <br/><br/>
 <div className='bottomLine'> 
 Prepared By: Waqas Saleem <br/>

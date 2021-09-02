@@ -136,26 +136,6 @@ class AddSegment extends Component{
 
 
 
-    // componentDidMount(){
-    //   firebase.database().ref('RecordBook'+this.state.user).on('child_added' , (data)=> { 
-    //     this.state.objects.push(data.val())
-
-    //   }  ) 
-    // }
-
-
-    // componentWillMount(){
-    //     var userId = firebase.auth().currentUser.uid;
-    //     var userEmail = firebase.auth().currentUser.email
-        
-    //     this.setState({user:userId,userEmail:userEmail})
-    //   }
-
-
-
-
-
-
     changeHandler = (e) => {
         this.setState({ 
           [e.target.name]: e.target.value
@@ -193,10 +173,23 @@ class AddSegment extends Component{
             editAccount =(i)=>{
               var reqObj = this.state.objects[i]
               var key = this.state.objects[i].key
+              
+              
+              
               var editAccount = prompt('Please edit Account Title',reqObj.firstName)
+              if(editAccount === null){
+                editAccount = reqObj.firstName
+              }
               var editAddress = prompt('Please edit Address/Contact..etc',reqObj.address)
-            
-              reqObj.firstName = editAccount.replace(/  +/g, ' ').trim();
+              if(editAddress === null){
+                editAddress = reqObj.address
+              }
+
+
+             
+
+
+              reqObj.firstName = editAccount.replace(/  +/g, ' ').trim();  
               reqObj.address = editAddress.replace(/  +/g, ' ').trim();
             
             
@@ -204,9 +197,9 @@ class AddSegment extends Component{
               
             
               this.state.objects.splice(i,1,reqObj)
-              // this.setState({partyObjects:updateObj})
               
-              // this.setState({editRefresh:true})
+              
+              
             }
             
 
@@ -296,47 +289,6 @@ class AddSegment extends Component{
     })
   
   }
-
-
-
-
-//   componentDidMount(){
-//     var dataPushPromise = new Promise( (res,rej)=>{
-//     var userId = firebase.auth().currentUser.uid;
-//     var userEmail = firebase.auth().currentUser.email
-
-//     this.setState({user:userId,userEmail:userEmail})
-    
-//     res()
-//     rej('Operation Failed: Data From Firebase does not push in state successfully')
-//   } )
-//   dataPushPromise.then(()=>{
-//     firebase.database().ref('RecordBook'+this.state.user).on('child_added' , (data)=> { 
-//       this.state.objects.push(data.val())
-
-//     }  )
-//   },(err)=>{
-//     alert(err)
-//   })
-
-// }
-
-
-  
-    // componentWillMount(){
-    //   var userId = firebase.auth().currentUser.uid;
-    //   var userEmail = firebase.auth().currentUser.email
-      
-    //   this.setState({user:userId,userEmail:userEmail})
-    // }
-
-
-    // componentDidMount(){
-    //   firebase.database().ref('RecordBook'+this.state.user).on('child_added' , (data)=> { 
-    //     this.state.objects.push(data.val())
-
-    //   }  ) 
-    // }
 
 
 
@@ -469,47 +421,6 @@ class AddSegment extends Component{
   }
 
 
-//   componentDidMount(){
-//     var dataPushPromise = new Promise( (res,rej)=>{
-//     var userId = firebase.auth().currentUser.uid;
-//     var userEmail = firebase.auth().currentUser.email
-
-//     this.setState({user:userId,userEmail:userEmail})
-    
-//     res()
-//     rej('Operation Failed: Data From Firebase does not push in state successfully')
-//   } )
-//   dataPushPromise.then(()=>{
-//     firebase.database().ref('RecordBook'+this.state.user).on('child_added' , (data)=> { 
-//       this.state.objects.push(data.val())
-
-//     }  )
-//   },(err)=>{
-//     alert(err)
-//   })
-
-// }
-
-
-
-
-
-    
-  // componentWillMount(){
-    //   var userId = firebase.auth().currentUser.uid;
-    //   var userEmail = firebase.auth().currentUser.email
-      
-    //   this.setState({user:userId,userEmail:userEmail})
-    // }
-
-
-
-    // componentDidMount(){
-    //   firebase.database().ref('RecordBook'+this.state.user).on('child_added' , (data)=> { 
-    //     this.state.objects.push(data.val())
-
-    //   }  ) 
-    // }
 
 
 
@@ -579,6 +490,10 @@ class AddSegment extends Component{
       var key = this.state.objects[segindx].key
       var msg = this.state.objects[segindx].msg
       var editAlert = prompt('Please edit your message',msg[index])
+      if(editAlert === null){
+        editAlert = msg[index]
+      }
+
       reqObj.msg.splice(index,1,editAlert)
     
       firebase.database().ref('RecordBook'+this.state.user).child(reqObj.key).set(reqObj)
